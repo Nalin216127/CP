@@ -1,0 +1,58 @@
+STL Applications and Problem Ideas - 1
+
+Learning the Standard Template Library (STL) in C++ is crucial for efficient and robust programming. Let's explore some STL applications and problem ideas to help reinforce your understanding.
+
+
+1. Problem: Given a shop with N items, where each item is indexed by i and has a price Pi. The task is to determine the maximum number of items that can be purchased given a budget B.
+
+Algorithm Explanation:
+
+      1. Sort the items based on their prices in non-decreasing order.
+      2. Initialize a variable maxItems to keep track of the maximum number of items that can be bought.
+      3. Iterate through the sorted items:
+          -If the price of the current item is less than or equal to the remaining budget B:
+              -Deduct the price of the current item from the budget B.
+              -Increment the maxItems count.
+          -If the price of the current item exceeds the remaining budget, break the loop.
+      4. Return the value of maxItems, which represents the maximum number of items that can be bought within the budget.
+
+
+//Code:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int maxItems(vector<int>& prices, int budget) {
+    sort(prices.begin(), prices.end());
+    int maxItems = 0;
+    for (int i = 0; i < prices.size(); ++i) {
+        if (prices[i] <= budget) {
+            budget -= prices[i];
+            maxItems++;
+        } else {
+            break;
+        }
+    }
+    return maxItems;
+}
+
+int main() {
+    int N, B;
+    cin >> N;
+    vector<int> prices(N);
+    for (int i = 0; i < N; ++i) {
+        cin >> prices[i];
+    }
+    cin >> B;
+    int max_items = maxItems(prices, B);
+    cout<< max_items << endl;
+    return 0;
+}
+
+
+
+Time Complexity:
+
+-Sorting the items takes O(N log N) time.
+-Iterating through the sorted items takes O(N) time.
+-Thus, the overall time complexity of the algorithm is O(N log N) due to the sorting step.
